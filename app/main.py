@@ -1,17 +1,17 @@
 from app.database import initialize_db
-from app.movies import add_movie, list_movies
+from app.bookings import create_booking
 
 def main():
     initialize_db()
 
-    add_movie("Inception", "Sci-Fi", "2010", 250)
-    add_movie("Interstellar", "Sci-Fi", "2014", 300)
-    add_movie("The Dark Knight", "Action", "2008", 280)
-
-    movies = list_movies()
-    print("\n🎬 Movies Available:\n")
-    for movie in movies:
-        print(movie)
+    create_booking(
+        customer_name="Nirvan",
+        mobile="9999999999",
+        movie_name="Inception",
+        tickets=3,
+        seat_type="VIP",
+        show_time="7 PM"
+    )
 
 if __name__ == "__main__":
     main()
