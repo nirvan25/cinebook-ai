@@ -56,3 +56,14 @@ def get_movie_popularity_data():
     conn.close()
 
     return data
+
+def recommend_movie():
+    """
+    Recommends the most popular movie based on
+    historical booking frequency.
+    """
+    popular = get_most_popular_movie()
+
+    if popular:
+        return popular[0]
+    return None
