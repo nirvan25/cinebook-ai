@@ -1,10 +1,8 @@
-import sqlite3
-
-DATABASE_PATH = "database/cinebook.db"
+from app.database import get_connection
 
 
 def get_movie_popularity_data():
-    conn = sqlite3.connect(DATABASE_PATH)
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -20,18 +18,11 @@ def get_movie_popularity_data():
 
 
 def get_total_revenue():
-    conn = sqlite3.connect(DATABASE_PATH)
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("SELECT SUM(total_cost) FROM bookings")
-    result = cursor.fetchone()
+    result = cursor.fetchone()[0]
 
     conn.close()
-    return result[0] if result[0] else 0
-
-
-def recommend_movie():
-    data = get_movie_popularity_data()
-    if data:
-        return data[0][0]
-    return None
+    return result if result else 0

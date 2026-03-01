@@ -1,5 +1,17 @@
-venv/
+# Python
 __pycache__/
 *.pyc
+*.pyo
+
+# Mac
 .DS_Store
-database/cinebook.db
+
+# Database
+*.db
+
+# Virtual Environment
+venv/
+.env
+
+# Streamlit cache
+.streamlit/
