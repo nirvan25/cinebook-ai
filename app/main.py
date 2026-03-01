@@ -1,5 +1,5 @@
 from app.database import initialize_db
-from app.movies import list_movies, add_movie
+from app.movies import list_movies, add_movie, delete_movie
 from app.bookings import create_booking
 from analytics.dashboard import show_dashboard
 from analytics.insights import recommend_movie
@@ -14,7 +14,6 @@ def display_movies():
 
     print("\n🎬 Available Movies:")
     for movie in movies:
-        # movie structure: (id, name, type, release_date, price)
         print(f"{movie[1]} | ₹{movie[4]}")
 
 
@@ -28,7 +27,8 @@ def main():
         print("3. View Analytics Dashboard")
         print("4. Get Recommended Movie")
         print("5. Add Movie")
-        print("6. Exit")
+        print("6. Delete Movie")
+        print("7. Exit")
 
         choice = input("Select an option: ")
 
@@ -65,6 +65,10 @@ def main():
             print("✅ Movie added successfully.")
 
         elif choice == "6":
+            name = input("Enter movie name to delete: ")
+            delete_movie(name)
+
+        elif choice == "7":
             print("Goodbye 👋")
             break
 

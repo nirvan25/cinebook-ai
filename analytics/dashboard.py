@@ -18,18 +18,19 @@ def show_dashboard():
 
     plt.xlabel("Movies")
     plt.ylabel("Tickets Sold")
-    plt.title(f"Movie Popularity Analysis | Total Revenue ₹{revenue}")
+    plt.title(f"Movie Popularity | Total Revenue ₹{revenue}")
     plt.xticks(rotation=30)
     plt.grid(axis="y", linestyle="--", alpha=0.7)
 
-    # Add value labels above bars
     for bar in bars:
         height = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width() / 2,
-                 height,
-                 f'{int(height)}',
-                 ha='center',
-                 va='bottom')
+        plt.text(
+            bar.get_x() + bar.get_width() / 2,
+            height,
+            f"{int(height)}",
+            ha="center",
+            va="bottom"
+        )
 
     plt.tight_layout()
     plt.show()

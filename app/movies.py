@@ -1,7 +1,10 @@
-from app.database import connect
+import sqlite3
+
+DATABASE_PATH = "database/cinebook.db"
+
 
 def add_movie(name, genre, release_date, price):
-    conn = connect()
+    conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -12,8 +15,9 @@ def add_movie(name, genre, release_date, price):
     conn.commit()
     conn.close()
 
+
 def list_movies():
-    conn = connect()
+    conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM movies")
@@ -22,15 +26,17 @@ def list_movies():
     conn.close()
     return movies
 
-def get_movie_price(movie_name):
-    conn = connect()
+
+def delete_movie(movie_name):
+    conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
-    cursor.execute("SELECT price FROM movies WHERE name = ?", (movie_name,))
-    result = cursor.fetchone()
+    cursor.execute("DELETE FROM movies WHERE name = ?", (movie_name,))
+    conn.commit()
+
+    if cursor.rowcount == 0:
+        print("No movie found with that name.")
+    else:
+        print("✅ Movie deleted successfully.")
 
     conn.close()
-
-    if result:
-        return result[0]
-    return None
